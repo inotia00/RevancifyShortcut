@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Revancify</string>
+    <string name="toast_require_permission">Permissions are required to run termux</string>
+    <string name="toast_revancify_not_found">Please install Revancify</string>
+    <string name="toast_run_revancify">Run Revancify..</string>
+    <string name="toast_termux_not_found">Please install Termux and allow permissions</string>
+</resources>
