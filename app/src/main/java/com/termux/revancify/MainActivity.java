@@ -11,8 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import java.io.File;
-
 public final class MainActivity extends Activity {
     /**
      * Permission request code
@@ -39,6 +37,12 @@ public final class MainActivity extends Activity {
      * Termux package name
      */
     private static final String TERMUX_PACKAGE_NAME = "com.termux";
+
+    /**
+     * Termux work dir path
+     */
+    @SuppressLint("SdCardPath")
+    private static final String TERMUX_WORKDIR = "/data/data/com.termux/files/home";
 
     /**
      * Termux monet releases
@@ -104,7 +108,11 @@ public final class MainActivity extends Activity {
             intent.setClassName("com.termux", "com.termux.app.RunCommandService");
             intent.setAction("com.termux.RUN_COMMAND");
             intent.putExtra("com.termux.RUN_COMMAND_PATH", REVANCIFY_PATH);
-            startService(intent);
+            intent.putExtra("com.termux.RUN_COMMAND_WORKDIR", TERMUX_WORKDIR);
+            intent.putExtra("com.termux.RUN_COMMAND_BACKGROUND", false);
+            intent.putExtra("com.termux.RUN_COMMAND_SESSION_ACTION", "0");
+            startForegroundService(intent);
+
             Helper.showToastShort(getString(R.string.toast_run_revancify));
         } catch (Exception ex) {
             Helper.showToastShort(getString(R.string.toast_revancify_not_found));
